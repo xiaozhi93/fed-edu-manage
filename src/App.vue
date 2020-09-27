@@ -2,6 +2,7 @@
   <div id="app">
     <h1>拉勾教育</h1>
     <router-view/>
+    <el-button type="primary">按钮</el-button>
   </div>
 </template>
 <script lang="ts">
@@ -16,10 +17,13 @@ export default Vue.extend({
   },
   methods: {
     test () {
-      this.a.aaa()
+      // this.a.aaa()
     }
   }
 })
 </script>
 <style lang="scss" scoped>
+h1 {
+  color: $primary-color
+}
 </style>
