@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="advert">
     <h1>广告管理</h1>
-  </div>
+  </section>
 </template>
