@@ -1,13 +1,13 @@
 <template>
-  <el-container>
+  <el-container class="app-container">
     <el-aside width="200px">
       <app-aside></app-aside>
     </el-aside>
     <el-container>
-      <el-header>
+      <el-header class="app-header">
         <app-header></app-header>
       </el-header>
-      <el-main>
+      <el-main class="app-main">
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -26,8 +26,9 @@ export default Vue.extend({
 })
 </script>
 <style lang="scss" scoped>
-.el-container {
+.app-container {
   height: 100vh;
   min-width: 980px;
 }
+
 </style>

@@ -1,5 +1,8 @@
 <template>
   <div class="header">
+    <el-button type="text" class="hamburger">
+      <i class="el-icon-s-fold"></i>
+    </el-button>
     <el-breadcrumb separator-class="el-icon-arrow-right">
     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>活动管理</el-breadcrumb-item>
@@ -30,8 +33,17 @@ export default Vue.extend({
 <style lang="scss" scoped>
   .header {
     height: 100%;
+    margin: 0 -20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    background: #ffffff;
+    .hamburger {
+      font-size: 20px;
+      margin-right: 10px;
+      padding: 15px 20px;
+    }
+    .el-dropdown {
+      margin-left: auto;
+    }
   }
 </style>

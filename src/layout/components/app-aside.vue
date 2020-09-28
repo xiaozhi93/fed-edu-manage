@@ -3,8 +3,8 @@
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
-      background-color="#545c64"
-      text-color="#fff"
+      background-color="#ffffff"
+      text-color="#303133"
       active-text-color="#ffd04b">
       <el-submenu index="1">
         <template slot="title">
