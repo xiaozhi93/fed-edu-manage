@@ -1,24 +1,15 @@
 # fed-manage
 
-## Project setup
-```
-yarn install
+## FQA
+- ts中as的使用，类型断言的一种，用于限制某个数据类型；
+```typescript
+ // 类型断言形式一，尖括号语法    
+let someValue: any = 'this is a string';
+let strLen: number = (<string>someValue).length
+// 类型断言形式二，as语法    
+let someValue: any = 'this is a string';
+let strLen: number = (someValue as string).length    
+
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 函数中使用try catch finally,在try执行return,finally也会执行

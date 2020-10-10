@@ -1,15 +1,16 @@
 import request from '@/utils/request'
+import qs from 'qs'
 
 interface LoginParams {
   phone: string;
   password: string;
 }
 
-export function login (params: LoginParams) {
+export function login (data: LoginParams) {
   return request({
-    method: 'GET',
+    method: 'POST',
     url: '/front/user/login',
-    params
+    data: qs.stringify(data)
   })
 }
 
