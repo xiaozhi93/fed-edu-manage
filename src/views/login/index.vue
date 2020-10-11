@@ -5,14 +5,38 @@
     </header>
     <el-form class="login-form" ref="form" :model="form" label-position="top">
       <h2>登录</h2>
-      <el-form-item label="手机号" prop="phone" :rules="[{ required: true, message: '手机号必填', trigger: 'blur' }]">
+      <el-form-item
+        label="手机号"
+        prop="phone"
+        :rules="[
+          { required: true, message: '手机号必填', trigger: 'blur' },
+          {
+            pattern: /^1\d{10}$/,
+            message: '请输入正确手机号',
+            trigger: 'blur',
+          },
+        ]"
+      >
         <el-input v-model="form.phone" placeholder="请输入手机号"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="password" :rules="[{ required: true, message: '密码必填', trigger: 'blur' }]">
-        <el-input v-model="form.password"  placeholder="请输入密码"></el-input>
+      <el-form-item
+        label="密码"
+        prop="password"
+        :rules="[
+          { required: true, message: '密码必填', trigger: 'blur' },
+          { min: 6, max: 18, message: '长度在6到18个字符', trigger: 'blur' },
+        ]"
+      >
+        <el-input v-model="form.password" placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" class="login-button" :loading="loading" @click="onSubmit">登录</el-button>
+        <el-button
+          type="primary"
+          class="login-button"
+          :loading="loading"
+          @click="onSubmit"
+          >登录</el-button
+        >
       </el-form-item>
     </el-form>
   </section>
@@ -26,8 +50,8 @@ export default Vue.extend({
   data () {
     return {
       form: {
-        phone: '',
-        password: ''
+        phone: '18631142257',
+        password: '111111'
       },
       loading: false
     }
@@ -39,12 +63,16 @@ export default Vue.extend({
         await (this.$refs.form as Form).validate()
         const { data } = await login(this.form)
         if (data.state !== 1) {
-          return this.$message.error(data.message)
+          this.$message.error(data.message)
+        } else {
+          // 记录状态，并且在访问需要登录的页面时候判断有没有登录状态
+          this.$store.commit('setUser', data.content)
+          // 跳转，及跳转到原来的页面
+          this.$router.push(this.$route.query.redirect || '/')
+          this.$message.success('登录成功')
         }
-        this.$router.push({
-          name: 'home'
-        })
       } catch (e) {
+        this.$message.error(e.message)
       } finally {
         this.loading = false
       }

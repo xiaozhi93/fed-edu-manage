@@ -34,6 +34,21 @@ const routes: Array<RouteConfig> = [
         path: '/course',
         name: 'course',
         component: () => import(/* webpackChunkName: 'course' */ '@/views/course/index.vue')
+      },
+      {
+        path: '/user',
+        name: 'user',
+        component: () => import(/* webpackChunkName: 'user' */ '@/views/user/index.vue')
+      },
+      {
+        path: '/advert',
+        name: 'advert',
+        component: () => import(/* webpackChunkName: 'advert' */ '@/views/advert/index.vue')
+      },
+      {
+        path: '/advert-space',
+        name: 'advert-space',
+        component: () => import(/* webpackChunkName: 'advert-space' */ '@/views/advert-space/index.vue')
       }
     ]
   },
@@ -49,18 +64,18 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // 匹配需要校验就校验，也会匹配到父路由
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    next()
-    // if (!store.state.user) {
-    //   next({
-    //     name: 'login',
-    //     query: {
-    //       redirect: to.fullPath
-    //     }
-    //   })
-    // } else {
-    //   next()
-    // }
+    if (!store.state.user) {
+      next({
+        name: 'login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+    } else {
+      next()
+    }
   } else {
     next()
   }

@@ -1,12 +1,13 @@
 import request from '@/utils/request'
 import qs from 'qs'
+import store from '@/store'
 
-interface LoginParams {
+interface User {
   phone: string;
   password: string;
 }
 
-export function login (data: LoginParams) {
+export function login (data: User) {
   return request({
     method: 'POST',
     url: '/front/user/login',
@@ -24,7 +25,10 @@ export function getUserPermissions () {
 export function getInfo () {
   return request({
     method: 'GET',
-    url: '/front/user/getInfo'
+    url: '/front/user/getInfo',
+    headers: {
+      Authorization: store.state.user.access_token
+    }
   })
 }
 
