@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <el-button type="text" class="hamburger">
+    <el-button type="text" class="hamburger" @click="toggleCollapse">
       <i class="el-icon-s-fold"></i>
     </el-button>
     <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -35,6 +35,9 @@ export default Vue.extend({
     this.loadUserInfo()
   },
   methods: {
+    toggleCollapse () {
+      this.$store.commit('setIsCollapse', !this.$store.state.isCollapse)
+    },
     async loadUserInfo () {
       const { data } = await getInfo()
       this.userInfo = data.content

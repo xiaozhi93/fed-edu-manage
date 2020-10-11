@@ -1,6 +1,11 @@
 <template>
-  <div class="aside">
+  <el-aside class="aside" :class="{collapse: $store.state.isCollapse}" style="width: auto">
+    <router-link to="/" class="logo">
+      <img src="http://eduboss.lagou.com/edu-boss-fed/assets/img/logo.e8b9190b.png" alt="edu">
+      <h1>Edu Boss</h1>
+    </router-link>
     <el-menu
+      :collapse="isCollapse"
       :default-active="$route.name"
       class="el-menu-vertical-demo"
       background-color="#ffffff"
@@ -34,18 +39,35 @@
           <el-menu-item index="advert-space" :route="{name: 'advert-space'}">广告位列表</el-menu-item>
       </el-submenu>
     </el-menu>
-  </div>
+  </el-aside>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  name: 'AppAside'
+  name: 'AppAside',
+  data () {
+    return {
+      isCollapse: false
+    }
+  }
 })
 </script>
 <style lang="scss" scoped>
   .aside {
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $primary-color;
+      text-decoration: none;
+      height: 60px;
+      img {
+        margin: 10px;
+        width: 30px;
+      }
+    }
     .el-menu {
-      min-height: 100vh;
+      min-height: calc(100vh - 60px);
     }
   }
 </style>
