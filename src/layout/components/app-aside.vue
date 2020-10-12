@@ -51,13 +51,13 @@ export default Vue.extend({
   .aside {
     .logo {
       display: flex;
-      justify-content: center;
       align-items: center;
+      padding: 15px 0 15px 20px;
+      line-height: 30px;
       color: $primary-color;
       text-decoration: none;
-      height: 60px;
       img {
-        margin: 10px;
+        margin-right: 10px;
         width: 30px;
       }
       h1 {
@@ -66,10 +66,11 @@ export default Vue.extend({
         width: 106px;
         white-space: nowrap;
         overflow: hidden;
+        margin: 0;
       }
     }
     .el-menu {
-      min-height: calc(100vh - 60px);
+      min-height: calc(100vh - 70px);
       &:not(.el-menu--collapse) {
         width: 240px;
       }
