@@ -22,7 +22,7 @@
           <el-menu-item index="menu" :route="{name: 'menu'}">菜单列表</el-menu-item>
           <el-menu-item index="resource" :route="{name: 'resource'}">资源列表</el-menu-item>
       </el-submenu>
-      <el-menu-item index="home" :route="{name: 'home'}">
+      <el-menu-item index="course" :route="{name: 'course'}">
         <i class="el-icon-menu"></i>
         <span slot="title">课程管理</span>
       </el-menu-item>

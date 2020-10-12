@@ -17,3 +17,4 @@ let strLen: number = (someValue as string).length
 - 给组件注册原生的事件，如果不支持，在组件的根元素注册事件，使用@click.nativce=""
 - router.currentRoute.fullPath, currentRoute获取当前路由信息
 - 设置数组类型 let requests: any[] = []或者 let requests: Array<any> = []
+- 左右两端对齐， 使用flex布局，右端的使用margin-left: auto
