@@ -68,7 +68,7 @@ export default Vue.extend({
           // 记录状态，并且在访问需要登录的页面时候判断有没有登录状态
           this.$store.commit('setUser', data.content)
           // 跳转，及跳转到原来的页面
-          this.$router.push(this.$route.query.redirect || '/')
+          this.$router.push(this.$route.query.redirect as string || '/')
           this.$message.success('登录成功')
         }
       } catch (e) {

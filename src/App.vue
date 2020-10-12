@@ -10,13 +10,9 @@ import Vue from 'vue'
 export default Vue.extend({
   data () {
     return {
-      a: 1
     }
   },
   methods: {
-    test () {
-      // this.a.aaa()
-    }
   }
 })
 </script>

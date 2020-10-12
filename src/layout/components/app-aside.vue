@@ -5,9 +5,9 @@
       <h1>Edu Boss</h1>
     </router-link>
     <el-menu
-      :collapse="isCollapse"
+      :collapse="$store.state.isCollapse"
       :default-active="$route.name"
-      class="el-menu-vertical-demo"
+      class="menu"
       background-color="#ffffff"
       text-color="#303133"
       active-text-color="#ffd04b"
@@ -44,12 +44,7 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  name: 'AppAside',
-  data () {
-    return {
-      isCollapse: false
-    }
-  }
+  name: 'AppAside'
 })
 </script>
 <style lang="scss" scoped>
@@ -65,9 +60,26 @@ export default Vue.extend({
         margin: 10px;
         width: 30px;
       }
+      h1 {
+        display: inline-block;
+        transition: width 0.3s;
+        width: 106px;
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
     .el-menu {
       min-height: calc(100vh - 60px);
+      &:not(.el-menu--collapse) {
+        width: 240px;
+      }
+    }
+    &.collapse {
+      .logo {
+        h1 {
+          width: 0;
+        }
+      }
     }
   }
 </style>

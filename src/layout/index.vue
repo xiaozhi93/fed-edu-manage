@@ -1,8 +1,6 @@
 <template>
   <el-container class="app-container">
-    <el-aside width="200px">
-      <app-aside></app-aside>
-    </el-aside>
+    <app-aside></app-aside>
     <el-container>
       <el-header class="app-header">
         <app-header></app-header>
