@@ -10,7 +10,7 @@
       class="menu"
       background-color="#ffffff"
       text-color="#303133"
-      active-text-color="#ffd04b"
+      active-text-color="#40586f"
       :router="true"
       >
       <el-submenu index="auth-manage">
