@@ -64,10 +64,10 @@ export default Vue.extend({
     }
   },
   methods: {
-    handleSizeChange (size) {
+    handleSizeChange (size: number) {
       console.log(size)
     },
-    handleCurrentChange (page) {
+    handleCurrentChange (page: number) {
       console.log(page)
     }
   }

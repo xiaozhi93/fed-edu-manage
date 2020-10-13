@@ -11,14 +11,14 @@ interface Role {
 export function getRoleAll () {
   return request({
     method: 'GET',
-    url: '/front/role/all'
+    url: '/boss/role/all'
   })
 }
 
 export function getRoleAllAndPermission (userId: number) {
   return request({
     method: 'GET',
-    url: '/role/getRolesWithUserPermission',
+    url: '/boss/role/getRolesWithUserPermission',
     params: { userId }
   })
 }
@@ -26,8 +26,8 @@ export function getRoleAllAndPermission (userId: number) {
 export function getRolePages (data: object) {
   return request({
     method: 'POST',
-    url: '/role/getRolePages',
-    data: qs.stringify(data)
+    url: '/boss/role/getRolePages',
+    data
   })
 }
 
@@ -42,8 +42,8 @@ export function allocateRolesToUser (data: { userId: number; roleIdList: number[
 export function saveOrUpdateRole (data: Role) {
   return request({
     method: 'POST',
-    url: '/role/saveOrUpdate',
-    data: qs.stringify(data)
+    url: '/boss/role/saveOrUpdate',
+    data
   })
 }
 
