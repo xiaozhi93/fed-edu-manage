@@ -22,7 +22,7 @@
           <el-menu-item index="menu" :route="{name: 'menu'}">菜单列表</el-menu-item>
           <el-menu-item index="resource" :route="{name: 'resource'}">资源列表</el-menu-item>
       </el-submenu>
-      <el-menu-item index="home" :route="{name: 'home'}">
+      <el-menu-item index="course" :route="{name: 'course'}">
         <i class="el-icon-menu"></i>
         <span slot="title">课程管理</span>
       </el-menu-item>
@@ -51,13 +51,13 @@ export default Vue.extend({
   .aside {
     .logo {
       display: flex;
-      justify-content: center;
       align-items: center;
+      padding: 15px 0 15px 20px;
+      line-height: 30px;
       color: $primary-color;
       text-decoration: none;
-      height: 60px;
       img {
-        margin: 10px;
+        margin-right: 10px;
         width: 30px;
       }
       h1 {
@@ -66,10 +66,11 @@ export default Vue.extend({
         width: 106px;
         white-space: nowrap;
         overflow: hidden;
+        margin: 0;
       }
     }
     .el-menu {
-      min-height: calc(100vh - 60px);
+      min-height: calc(100vh - 70px);
       &:not(.el-menu--collapse) {
         width: 240px;
       }
