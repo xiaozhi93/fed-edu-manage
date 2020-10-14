@@ -15,7 +15,15 @@ export function getAllSpaces () {
   })
 }
 
-export function saveOrUpdateSpace (data: Space) {
+export function getSpacesById (id: number | string) {
+  return request({
+    method: 'GET',
+    url: '/front/ad/space/getSpaceById',
+    params: { id }
+  })
+}
+
+export function saveOrUpdateSpace (data: any) {
   return request({
     method: 'POST',
     url: '/front/ad/space/saveOrUpdate',

@@ -16,18 +16,30 @@
       </el-form-item>
     </el-form>
     <el-table :data="tableData" border style="width: 100%" class="page-table">
-      <el-table-column prop="id" label="ID"> </el-table-column>
-      <el-table-column prop="name" label="姓名"> </el-table-column>
+      <el-table-column prop="id" label="ID" width="120px" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="nportrait" label="头像" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="name" label="用户名" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="phone" label="手机号" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="createTime" label="注册时间" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="status" label="状态" align="center" header-align="center"> </el-table-column>
+      <el-table-column label="操作" align="center" header-align="center">
+        <template>
+          <el-row>
+            <el-button type="text">禁用</el-button>
+            <el-button type="text">分配角色</el-button>
+          </el-row>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       class="page-pagination"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size="100"
+      :current-page="userFilter.currentPage"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="userFilter.pageSize"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="400">
+      :total="total">
     </el-pagination>
   </section>
 </template>

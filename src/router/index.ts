@@ -46,6 +46,16 @@ const routes: Array<RouteConfig> = [
         component: () => import(/* webpackChunkName: 'course' */ '@/views/course/index.vue')
       },
       {
+        path: '/course-create',
+        name: 'course-create',
+        component: () => import(/* webpackChunkName: 'course-create' */ '@/views/course/create.vue')
+      },
+      {
+        path: '/course-edit',
+        name: 'course-edit',
+        component: () => import(/* webpackChunkName: 'course-edit' */ '@/views/course/edit.vue')
+      },
+      {
         path: '/user',
         name: 'user',
         component: () => import(/* webpackChunkName: 'user' */ '@/views/user/index.vue')
@@ -56,9 +66,29 @@ const routes: Array<RouteConfig> = [
         component: () => import(/* webpackChunkName: 'advert' */ '@/views/advert/index.vue')
       },
       {
+        path: '/advert-create',
+        name: 'advert-create',
+        component: () => import(/* webpackChunkName: 'advert-create' */ '@/views/advert/create.vue')
+      },
+      {
+        path: '/advert-edit',
+        name: 'advert-edit',
+        component: () => import(/* webpackChunkName: 'advert-edit' */ '@/views/advert/edit.vue')
+      },
+      {
         path: '/advert-space',
         name: 'advert-space',
         component: () => import(/* webpackChunkName: 'advert-space' */ '@/views/advert-space/index.vue')
+      },
+      {
+        path: '/advert-space-create',
+        name: 'advert-space-create',
+        component: () => import(/* webpackChunkName: 'advert-space-create' */ '@/views/advert-space/create.vue')
+      },
+      {
+        path: '/advert-space-edit',
+        name: 'advert-space-edit',
+        component: () => import(/* webpackChunkName: 'advert-space-edit' */ '@/views/advert-space/edit.vue')
       }
     ]
   },
