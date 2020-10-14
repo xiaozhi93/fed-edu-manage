@@ -71,8 +71,7 @@ export default Vue.extend({
           this.$router.push(this.$route.query.redirect as string || '/')
           this.$message.success('登录成功')
         }
-      } catch (e) {
-        this.$message.error(e.message)
+      } catch (e) { // 接口报错message再次调用
       } finally {
         this.loading = false
       }

@@ -43,13 +43,14 @@ request.interceptors.request.use(function (config) {
 
 request.interceptors.response.use(function (response) { // 请求响应成功
   // 自定义错误状态码，错误处理这里
-  if (response.data.code === '00000') {
+  if (response.data.code === '000000' || response.data.state === 1) { // 业务中一定是成功的
     return response
   } else {
     Message.error(response.data.mesg || '错误')
     return Promise.reject(new Error(response.data.mesg || '错误'))
   }
-}, async function (error) { // 超出200状态码执行
+  // return response
+}, async function (error) { // 超出200状态码执行, try catch的catch不能再message提示了，否则提示两次
   // http错误状态码，错误处理这里
   if (error.response) { // 请求发出去收到响应，状态码超出2xx,比如400， 401（未认证,token无效，过期）， 403（禁止访问，没有权限）， 404（不能找到资源）， 500
     const { status } = error.response
@@ -103,7 +104,6 @@ request.interceptors.response.use(function (response) { // 请求响应成功
   } else if (error.request) { // 请求发出去没有收到响应
     Message.error('请求超时，请刷新重试')
   } else {
-    debugger
     Message.error(`请求失败，${error.message}`)
     // 设置请求时发生了一些事情，触发了一个错误
   }

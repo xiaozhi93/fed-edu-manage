@@ -2,44 +2,68 @@
   <section class="advert course">
     <el-form :inline="true" class="page-filter">
       <el-form-item class="page-filter-btn">
-        <el-button type="primary">添加菜单</el-button>
+        <el-button type="primary" @click="$router.push({ name: 'menu-create'})">添加菜单</el-button>
       </el-form-item>
     </el-form>
     <el-table :data="tableData" border style="width: 100%" class="page-table">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
+      <el-table-column prop="id" label="编号" width="180"> </el-table-column>
+      <el-table-column prop="name" label="菜单名称" width="180"> </el-table-column>
+      <el-table-column prop="level" label="菜单级别"> </el-table-column>
+      <el-table-column prop="icon" label="前端图标"> </el-table-column>
+      <el-table-column prop="orderNum" label="排序"> </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button type="text" @click="$router.push({ name: 'menu-edit', query: { id: scope.row.id}})">编辑</el-button>
+          <el-button type="text" @click="deleteMenu(scope.row.id)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </section>
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import { getMenuAll, deleteMenu } from '@/services/menu'
 export default Vue.extend({
   name: 'MenuPage',
   data () {
     return {
       tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }
       ]
+    }
+  },
+  created () {
+    this.loadMenuAll()
+  },
+  methods: {
+    async loadMenuAll () {
+      const { data } = await getMenuAll()
+      this.tableData = data.data
+    },
+    async deleteMenu (id: number) {
+      this.$confirm('确定删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        beforeClose: async (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true
+            try {
+              await deleteMenu(id)
+              done()
+            } catch (error) {} finally {
+              instance.confirmButtonLoading = false
+            }
+          } else {
+            done()
+          }
+        }
+      }).then(async () => {
+        this.loadMenuAll()
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      })
     }
   }
 })

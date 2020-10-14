@@ -61,7 +61,7 @@ export default Vue.extend({
       const { data } = await getCateGoryAll()
       this.tableData = data.data
     },
-    async saveOrUpdateCategory (category: { name: string | null; sort: string | number}) {
+    async saveOrUpdateCategory (category: any) {
       this.dialogVisible = true
       if (category) {
         this.categoryForm = category
