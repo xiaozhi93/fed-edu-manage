@@ -14,3 +14,11 @@ export function getQueryCourses (data: CourseParams) {
     data
   })
 }
+
+export function changeCourseState (params: { courseId: number; status: string }) {
+  return request({
+    method: 'GET',
+    url: '/boss/course/changeState',
+    params
+  })
+}

@@ -18,3 +18,13 @@ let strLen: number = (someValue as string).length
 - router.currentRoute.fullPath, currentRoute获取当前路由信息
 - 设置数组类型 let requests: any[] = []或者 let requests: Array<any> = []
 - 左右两端对齐， 使用flex布局，右端的使用margin-left: auto
+- 列表查询过滤需要将当前页设置为第一页
+- 函数的参数处理any如何合理的定义类型
+- 对于可能传，可能不传的值，定义成undefined
+  ```
+   courseFilter: {
+        courseName: undefined,
+        currentPage: 1,
+        pageSize: 10,
+        status: undefined
+      },

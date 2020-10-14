@@ -16,9 +16,8 @@
       </el-form-item>
     </el-form>
     <el-table :data="tableData" border style="width: 100%" class="page-table">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
+      <el-table-column prop="id" label="ID"> </el-table-column>
+      <el-table-column prop="name" label="姓名"> </el-table-column>
     </el-table>
     <el-pagination
       class="page-pagination"
@@ -34,41 +33,50 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import { getUserPages } from '@/services/user'
 export default Vue.extend({
   name: 'UserPage',
   data () {
     return {
       tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }
       ],
-      currentPage4: 1
+      userFilter: {
+        currentPage: 1,
+        pageSize: 10,
+        phone: undefined,
+        userId: undefined,
+        startCreateTime: undefined,
+        endCreateTime: undefined
+      },
+      total: 0,
+      loading: false
     }
   },
+  created () {
+    this.loadUserList()
+  },
   methods: {
-    handleSizeChange (size: number) {
-      console.log(size)
+    async loadUserList () {
+      const { data } = await getUserPages(this.userFilter)
+      this.tableData = data.data.records
+      this.total = data.data.total
     },
-    handleCurrentChange (page: number) {
-      console.log(page)
+    // handleReset () {
+    //   (this.$refs.filterForm as Form).resetFields()
+    // },
+    async handleFilter () {
+      this.loading = true
+      this.userFilter.currentPage = 1
+      await this.loadUserList()
+      this.loading = false
+    },
+    handleSizeChange (size: number) {
+      this.userFilter.pageSize = size
+      this.loadUserList()
+    },
+    handleCurrentChange (current: number) {
+      this.userFilter.currentPage = current
+      this.loadUserList()
     }
   }
 })

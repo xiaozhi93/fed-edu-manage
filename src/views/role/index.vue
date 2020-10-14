@@ -1,8 +1,8 @@
 <template>
   <section class="page role">
-    <el-form :inline="true" :model="form" class="page-filter">
+    <el-form :inline="true" :model="filterForm" class="page-filter">
        <el-form-item label="角色名称" prop="name">
-        <el-input placeholder="角色名称" clearable  v-model="form.name"></el-input>
+        <el-input placeholder="角色名称" clearable  v-model="filterForm.name"></el-input>
       </el-form-item>
        <el-form-item>
         <el-button type="primary" :loading="loading" @click="handleFilter">查询</el-button>

@@ -6,6 +6,15 @@ interface User {
   password: string;
 }
 
+interface UserParams {
+  currentPage: number;
+  pageSize: number;
+  phone?: string;
+  userId?: number;
+  startCreateTime?: number;
+  endCreateTime?: number;
+}
+
 export function login (data: User) {
   return request({
     method: 'POST',
@@ -14,6 +23,7 @@ export function login (data: User) {
   })
 }
 
+// 获取菜单列表和资源列表权限
 export function getUserPermissions () {
   return request({
     method: 'GET',
@@ -33,5 +43,13 @@ export function refreshToken (params: { refreshtoken: string }) {
     method: 'GET',
     url: '/front/user/refresh_token',
     params
+  })
+}
+
+export function getUserPages (data: UserParams) {
+  return request({
+    method: 'POST',
+    url: '/boss/user/getUserPages',
+    data
   })
 }

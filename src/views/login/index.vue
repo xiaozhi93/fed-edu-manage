@@ -50,7 +50,8 @@ export default Vue.extend({
   data () {
     return {
       form: {
-        phone: '18631142257',
+        // phone: '18631142257',
+        phone: '18201288771',
         password: '111111'
       },
       loading: false

@@ -1,58 +1,103 @@
 <template>
   <section class="page course">
-    <el-form :inline="true" class="page-filter">
-      <el-form-item label="课程名称">
-        <el-input placeholder="课程名称"></el-input>
+    <el-form :inline="true" :model="courseFilter" class="page-filter">
+      <el-form-item label="课程名称" prop="courseName">
+        <el-input placeholder="课程名称" v-model="courseFilter.courseName"></el-input>
       </el-form-item>
-      <el-form-item label="状态">
-        <el-select>
-          <el-option value="">全部</el-option>
-          <el-option :value="1">上架</el-option>
-          <el-option :value="2">下架</el-option>
+      <el-form-item label="状态" prop="status">
+        <el-select v-model="courseFilter.status" placeholder="全部">
+          <el-option value="1">上架</el-option>
+          <el-option value="0">下架</el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button>查询</el-button>
+        <el-button :loading="loading" @click="handleFilter">查询</el-button>
       </el-form-item>
       <el-form-item class="page-filter-btn">
         <el-button type="primary">新建课程</el-button>
       </el-form-item>
     </el-form>
     <el-table :data="tableData" border style="width: 100%" class="page-table">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
+      <el-table-column prop="id" label="ID" width="180"> </el-table-column>
+      <el-table-column prop="courseName" label="课程名称" width="180"> </el-table-column>
+      <el-table-column prop="price" label="价格"> </el-table-column>
+      <el-table-column prop="sortNum" label="排序"> </el-table-column>
+      <el-table-column prop="status" label="状态"> </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button type="text" @click="changeCourseStatus(scope.row)">上架</el-button>
+          <el-button type="text">编辑</el-button>
+          <el-button type="text">内容管理</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </section>
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import { getQueryCourses, changeCourseState } from '@/services/course'
 export default Vue.extend({
   name: 'CoursePage',
   data () {
     return {
       tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
+      ],
+      courseFilter: {
+        courseName: undefined,
+        currentPage: 1,
+        pageSize: 10,
+        status: undefined
+      },
+      loading: false
+    }
+  },
+  created () {
+    this.loadCourseList()
+  },
+  methods: {
+    async loadCourseList () {
+      const { data } = await getQueryCourses(this.courseFilter)
+      this.tableData = data.data.records
+    },
+    async handleFilter () {
+      this.loading = true
+      this.courseFilter.currentPage = 1
+      await this.loadCourseList()
+      this.loading = false
+    },
+    async changeCourseStatus (course: any) {
+      this.$confirm('确定上架?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        beforeClose: async (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true
+            try {
+              await changeCourseState({ courseId: course.courseId, status: course.status })
+              done()
+            } catch (error) {} finally {
+              instance.confirmButtonLoading = false
+            }
+          } else {
+            done()
+          }
         }
-      ]
+      }).then(async () => {
+        this.loadCourseList()
+        this.$message({
+          type: 'success',
+          message: '成功!'
+        })
+      })
+    },
+    handleSizeChange (size: number) {
+      this.courseFilter.pageSize = size
+      this.loadCourseList()
+    },
+    handleCurrentChange (current: number) {
+      this.courseFilter.currentPage = current
+      this.loadCourseList()
     }
   }
 })
