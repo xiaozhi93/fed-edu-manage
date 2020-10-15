@@ -12,12 +12,12 @@
       </el-form-item>
     </el-form>
     <el-table :data="tableData" v-loading="loading" border style="width: 100%">
-      <el-table-column prop="code" label="编号" width="180"> </el-table-column>
-      <el-table-column prop="name" label="角色名称" width="180">
+      <el-table-column prop="code" label="编号" width="150" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="name" label="角色名称" align="center" header-align="center">
       </el-table-column>
-      <el-table-column prop="description" label="描述"> </el-table-column>
-      <el-table-column prop="createdTime" label="添加时间"> </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column prop="description" label="描述" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="createdTime" label="添加时间" align="center" header-align="center"> </el-table-column>
+      <el-table-column label="操作" align="center" header-align="center">
         <template v-slot="scope">
           <el-row>
             <el-button type="text" @click="$router.push({ name: 'role-menu', query: { roleId: scope.row.id}})">

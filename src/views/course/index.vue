@@ -2,10 +2,10 @@
   <section class="page course">
     <el-form :inline="true" :model="courseFilter" class="page-filter">
       <el-form-item label="课程名称" prop="courseName">
-        <el-input placeholder="课程名称" v-model="courseFilter.courseName"></el-input>
+        <el-input placeholder="课程名称" clearable v-model="courseFilter.courseName"></el-input>
       </el-form-item>
       <el-form-item label="状态" prop="status">
-        <el-select v-model="courseFilter.status" placeholder="全部">
+        <el-select v-model="courseFilter.status" clearable placeholder="全部">
           <el-option value="1">上架</el-option>
           <el-option value="0">下架</el-option>
         </el-select>

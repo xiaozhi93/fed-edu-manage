@@ -43,12 +43,12 @@
       style="width: 100%"
       class="page-table"
     >
-      <el-table-column prop="id" label="编号" width="180"> </el-table-column>
-      <el-table-column prop="name" label="资源名称" width="180">
+      <el-table-column prop="id" label="编号" width="150" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="name" label="资源名称" align="center" header-align="center">
       </el-table-column>
-      <el-table-column prop="url" label="资源路径"> </el-table-column>
-      <el-table-column prop="description" label="描述"> </el-table-column>
-      <el-table-column prop="createdTime" label="添加时间"> </el-table-column>
+      <el-table-column prop="url" label="资源路径" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="description" label="描述" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="createdTime" label="添加时间" align="center" header-align="center"> </el-table-column>
     </el-table>
     <el-pagination
       class="page-pagination"

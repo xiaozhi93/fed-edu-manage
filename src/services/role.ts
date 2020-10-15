@@ -31,11 +31,11 @@ export function getRolePages (data: object) {
   })
 }
 
-export function allocateRolesToUser (data: { userId: number; roleIdList: number[]}) {
+export function allocateRolesToUser (data: { userId: any; roleIdList: number[]}) {
   return request({
     method: 'POST',
-    url: '/front/role/allocateUserRoles',
-    data: qs.stringify(data)
+    url: '/boss/role/allocateUserRoles',
+    data
   })
 }
 
@@ -57,12 +57,12 @@ export function deleteRole (id: number) {
 export function getRole (id: number) {
   return request({
     method: 'GET',
-    url: `/role/${id}`
+    url: `/boss/role/${id}`
   })
 }
 export function getRolesByUser (userId: number) {
   return request({
     method: 'GET',
-    url: `/role/user/${userId}`
+    url: `/boss/role/user/${userId}`
   })
 }

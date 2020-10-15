@@ -6,12 +6,12 @@
       </el-form-item>
     </el-form>
     <el-table :data="tableData" border style="width: 100%" class="page-table">
-      <el-table-column prop="id" label="编号" width="180"> </el-table-column>
-      <el-table-column prop="name" label="菜单名称" width="180"> </el-table-column>
-      <el-table-column prop="level" label="菜单级别"> </el-table-column>
-      <el-table-column prop="icon" label="前端图标"> </el-table-column>
-      <el-table-column prop="orderNum" label="排序"> </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column prop="id" label="编号" width="180" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="name" label="菜单名称" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="level" label="菜单级别" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="icon" label="前端图标" align="center" header-align="center"> </el-table-column>
+      <el-table-column prop="orderNum" label="排序" align="center" header-align="center"> </el-table-column>
+      <el-table-column label="操作" align="center" header-align="center">
         <template slot-scope="scope">
           <el-button type="text" @click="$router.push({ name: 'menu-edit', query: { id: scope.row.id}})">编辑</el-button>
           <el-button type="text" @click="deleteMenu(scope.row.id)">删除</el-button>
