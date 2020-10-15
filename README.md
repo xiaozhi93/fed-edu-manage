@@ -28,3 +28,5 @@ let strLen: number = (someValue as string).length
         pageSize: 10,
         status: undefined
       },
+- 如何定义promise返回值的类型
+- 数组 返回 undefined或者其他类型，，详情如何再进行操作

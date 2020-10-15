@@ -1,8 +1,8 @@
 <template>
   <el-card shadow="never">
     <el-form ref="spaceForm" :model="spaceForm">
-      <el-form-item label="广告位名称" prop="name" label-width="150px">
-        <el-input v-model="spaceForm.name" placeholder="请输入名称" :rules="[{required: true, message: '必填项', trigger: 'blur'}]"></el-input>
+      <el-form-item label="广告位名称" prop="name" label-width="150px" :rules="[{ required: true, message: '手机号必填', trigger: 'blur' }]">
+        <el-input v-model="spaceForm.name" placeholder="请输入名称"></el-input>
       </el-form-item>
       <el-form-item label-width="150px">
         <el-button type="primary" :loading="submitLoading" @click="saveOrUpdateSpace">提交</el-button>

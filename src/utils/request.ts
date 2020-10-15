@@ -45,9 +45,9 @@ request.interceptors.response.use(function (response) { // 请求响应成功
   // 自定义错误状态码，错误处理这里
   if (response.data.code === '000000' || response.data.state === 1) { // 业务中一定是成功的
     return response
-  } else {
-    Message.error(response.data.mesg || '错误')
-    return Promise.reject(new Error(response.data.mesg || '错误'))
+  } else { // 参数错误
+    Message.error(response.data.message || '错误')
+    return Promise.reject(new Error(response.data.message || '错误'))
   }
   // return response
 }, async function (error) { // 超出200状态码执行, try catch的catch不能再message提示了，否则提示两次

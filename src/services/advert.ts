@@ -1,5 +1,4 @@
 import request from '@/utils/request'
-import qs from 'qs'
 
 interface Space {
   id?: number;
@@ -38,10 +37,26 @@ export function getAdList () {
   })
 }
 
-export function saveOrUpdateAd (data: Space) {
+export function getAdInfo (id: string) {
+  return request({
+    method: 'GET',
+    url: '/front/ad/getAdById',
+    params: { id }
+  })
+}
+
+export function saveOrUpdateAd (data: any) {
   return request({
     method: 'POST',
     url: '/front/ad/saveOrUpdate',
     data
+  })
+}
+
+export function updateAdStatus (params: { id: number; status: number }) {
+  return request({
+    method: 'GET',
+    url: '/front/ad/updateStatus',
+    params
   })
 }

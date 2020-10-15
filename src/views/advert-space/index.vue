@@ -26,7 +26,8 @@ export default Vue.extend({
   data () {
     return {
       tableData: [
-      ]
+      ],
+      loading: true
     }
   },
   created () {
@@ -34,8 +35,10 @@ export default Vue.extend({
   },
   methods: {
     async loadAdvertSpaceList () {
+      this.loading = true
       const { data } = await getAllSpaces()
       this.tableData = data.content
+      this.loading = false
     }
   }
 })
