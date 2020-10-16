@@ -9,7 +9,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { RawLocation, RouteRecord } from 'vue-router'
-import { compile } from 'path-to-regexp'
 const levelList: RouteRecord[] = [] // 给data的状态定义类型
 export default Vue.extend({
   name: 'AppBreadcrumb',
