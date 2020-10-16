@@ -4,12 +4,7 @@
       <i class="el-icon-s-fold" v-if="$store.state.isCollapse"></i>
       <i class="el-icon-s-unfold" v-else></i>
     </el-button>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-    <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-    <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-  </el-breadcrumb>
+    <app-breadcrumb></app-breadcrumb>
   <el-dropdown>
   <span class="el-dropdown-link">
     <el-avatar :src="userInfo.portrait || 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'"></el-avatar>
@@ -24,9 +19,13 @@
 </template>
 <script>
 import Vue from 'vue'
+import AppBreadcrumb from './app-breadcrumb.vue'
 import { getInfo } from '@/services/user'
 export default Vue.extend({
   name: 'AppHeader',
+  components: {
+    AppBreadcrumb
+  },
   data () {
     return {
       userInfo: {}
