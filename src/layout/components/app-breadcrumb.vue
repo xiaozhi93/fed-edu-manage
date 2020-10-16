@@ -32,7 +32,8 @@ export default Vue.extend({
     },
     handleLink (item: RouteRecord) {
       const { redirect } = item
-      if (redirect) { // 重定向的
+      if (redirect) { // 重定向的, 重定向与当前相同处理
+        if (redirect === this.$route.path) return
         this.$router.push(redirect as RawLocation)
         return
       }
