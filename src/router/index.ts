@@ -9,13 +9,8 @@ const routes: Array<RouteConfig> = [
     path: '/',
     meta: { title: '首页', requiresAuth: true },
     component: () => import(/* webpackChunkName: 'layout' */ '@/layout/index.vue'),
+    redirect: '/course',
     children: [
-      {
-        path: '',
-        name: 'home',
-        component: () => import(/* webpackChunkName: 'course' */ '@/views/course/index.vue'),
-        meta: { title: '课程管理' }
-      },
       {
         path: '/role',
         name: 'role',

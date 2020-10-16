@@ -56,6 +56,7 @@ export default Vue.extend({
       line-height: 30px;
       color: $primary-color;
       text-decoration: none;
+      background: #ffffff;
       img {
         margin-right: 10px;
         width: 30px;
