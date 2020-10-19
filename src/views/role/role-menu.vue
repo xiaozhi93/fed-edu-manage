@@ -6,6 +6,12 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  name: 'RoleMenu'
+  name: 'RoleMenu',
+  data () {
+    return {
+      menuNodeList: []
+    }
+  }
+
 })
 </script>

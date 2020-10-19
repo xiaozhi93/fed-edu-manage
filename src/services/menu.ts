@@ -36,3 +36,26 @@ export function saveOrUpdateMenu (data: any) {
     data
   })
 }
+
+export function allocateRoleMenus (data: { roleId: number; menuIdList: number[]}) {
+  return request({
+    method: 'POST',
+    url: '/boss/menu/allocateRoleMenus',
+    data
+  })
+}
+
+export function getMenuNodeList () {
+  return request({
+    method: 'GET',
+    url: '/boss/menu/getMenuNodeList'
+  })
+}
+
+export function getRoleMenus (roleId: number) {
+  return request({
+    method: 'GET',
+    url: '/boss/menu/getRoleMenus',
+    params: { roleId }
+  })
+}

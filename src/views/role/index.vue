@@ -8,7 +8,7 @@
         <el-button type="primary" :loading="loading" @click="handleFilter">查询</el-button>
       </el-form-item>
       <el-form-item class="page-filter-btn">
-        <el-button type="primary">添加角色</el-button>
+        <el-button type="primary" @click="dialogVisible = true">添加角色</el-button>
       </el-form-item>
     </el-form>
     <el-table :data="tableData" v-loading="loading" border style="width: 100%">
@@ -20,15 +20,15 @@
       <el-table-column label="操作" align="center" header-align="center">
         <template v-slot="scope">
           <el-row>
-            <el-button type="text" @click="$router.push({ name: 'role-menu', query: { roleId: scope.row.id}})">
+            <el-button type="text" @click="$router.push({ name: 'allocMenu', query: { roleId: scope.row.id}})">
               分配菜单
             </el-button>
-            <el-button type="text" @click="$router.push({ name: 'role-resource', query: { roleId: scope.row.id}})">
+            <el-button type="text" @click="$router.push({ name: 'allocResource', query: { roleId: scope.row.id}})">
               分配资源
             </el-button>
           </el-row>
           <el-row>
-            <el-button type="text">
+            <el-button type="text" @click="editRole(scope.row.id)">
               编辑
             </el-button>
             <el-button type="text" @click="deleteRole(scope.row.id)">
@@ -38,11 +38,33 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog
+      title="添加角色"
+      :visible.sync="dialogVisible"
+      width="30%"
+      >
+     <el-form ref="roleForm" :model="roleForm" :rules="roleRules" label-width="120px">
+       <el-form-item label="角色名称" prop="name">
+         <el-input  v-model="roleForm.name" placeholder="请输入角色名称"></el-input>
+       </el-form-item>
+       <el-form-item label="角色编码" prop="code">
+         <el-input v-model="roleForm.code" placeholder="请输入角色编码"></el-input>
+       </el-form-item>
+       <el-form-item label="描述" prop="description">
+         <el-input type="textarea" v-model="roleForm.description" placeholder="请输入描述"></el-input>
+       </el-form-item>
+     </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" :loading="submitLoading" @click="createOrUpdateRole">确 定</el-button>
+      </span>
+    </el-dialog>
   </section>
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { getRolePages, deleteRole, saveOrUpdateRole } from '@/services/role'
+import { getRolePages, deleteRole, saveOrUpdateRole, getRole } from '@/services/role'
+import { Form } from 'element-ui'
 export default Vue.extend({
   name: 'RolePage',
   data () {
@@ -55,10 +77,27 @@ export default Vue.extend({
         size: 10,
         name: ''
       },
+      dialogVisible: false,
       roleForm: {
         name: '',
         code: '',
         description: ''
+      },
+      roleRules: {
+        name: [
+          {
+            required: true,
+            message: '请输入角色名称',
+            trigger: 'blur'
+          }
+        ],
+        code: [
+          {
+            required: true,
+            message: '请输入角色编码',
+            trigger: 'blur'
+          }
+        ]
       },
       submitLoading: false
     }
@@ -81,10 +120,18 @@ export default Vue.extend({
         this.loading = false
       }
     },
+    async editRole (id: number) {
+      const { data } = await getRole(id)
+      this.roleForm = data.data
+      this.dialogVisible = true
+    },
     async createOrUpdateRole () {
       this.submitLoading = true
       try {
+        await (this.$refs.roleForm as Form).validate()
         await saveOrUpdateRole(this.roleForm)
+        this.loadRoleList()
+        this.dialogVisible = false
       } catch (error) {
 
       } finally {
@@ -93,9 +140,22 @@ export default Vue.extend({
     },
     deleteRole (roleId: number) {
       this.$confirm('确定要删除吗', '删除提示', {
-        type: 'warning'
+        type: 'warning',
+        beforeClose: async (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true
+            try {
+              await deleteRole(roleId)
+              this.loadRoleList()
+              done()
+            } catch (error) {} finally {
+              instance.confirmButtonLoading = false
+            }
+          } else {
+            done()
+          }
+        }
       }).then(async () => {
-        await deleteRole(roleId)
         this.$message.success('删除成功')
       })
     }

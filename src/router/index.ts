@@ -18,6 +18,18 @@ const routes: Array<RouteConfig> = [
         meta: { title: '角色管理' }
       },
       {
+        path: '/allocMenu',
+        name: 'allocMenu',
+        component: () => import(/* webpackChunkName: 'role-menu' */ '@/views/role/role-menu.vue'),
+        meta: { title: '角色菜单管理' }
+      },
+      {
+        path: '/allocResource',
+        name: 'allocResource',
+        component: () => import(/* webpackChunkName: 'role-resource' */ '@/views/role/role-resource.vue'),
+        meta: { title: '角色资源管理' }
+      },
+      {
         path: '/menu',
         name: 'menu',
         component: () => import(/* webpackChunkName: 'menu' */ '@/views/menu/index.vue'),
@@ -40,6 +52,12 @@ const routes: Array<RouteConfig> = [
         name: 'resource',
         component: () => import(/* webpackChunkName: 'resource' */ '@/views/resource/index.vue'),
         meta: { title: '资源管理' }
+      },
+      {
+        path: '/resource-category',
+        name: 'resource-category',
+        component: () => import(/* webpackChunkName: 'resource-category' */ '@/views/resource/resource-category.vue'),
+        meta: { title: '资源分类' }
       },
       {
         path: '/course',

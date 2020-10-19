@@ -50,7 +50,7 @@ export function saveOrUpdateRole (data: Role) {
 export function deleteRole (id: number) {
   return request({
     method: 'DELETE',
-    url: `/role/${id}`
+    url: `/boss/role/${id}`
   })
 }
 

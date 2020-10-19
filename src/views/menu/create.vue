@@ -1,6 +1,6 @@
 <template>
   <section class="page create-menu">
-    <create-or-edit></create-or-edit>
+    <create-or-edit :isEdit="false"></create-or-edit>
   </section>
 </template>
 <script lang="ts">

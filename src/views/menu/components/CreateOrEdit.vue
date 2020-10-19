@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card shadow="never">
     <el-form ref="menuForm" :model="menuForm" label-width="80px">
       <el-form-item label="菜单名称" prop="name">
         <el-input v-model="menuForm.name"></el-input>
@@ -30,7 +30,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" :loading="loading" @click="onSubmit">提交</el-button>
-        <el-button>重置</el-button>
+        <el-button v-if="!isEdit">重置</el-button>
       </el-form-item>
     </el-form>
   </el-card>
