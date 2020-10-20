@@ -1,4 +1,5 @@
 <template>
+  <el-form>
   <el-card shadow="never">
     <el-form ref="spaceForm" :model="spaceForm">
       <el-form-item label="广告位名称" prop="name" label-width="150px">
@@ -10,6 +11,7 @@
       </el-form-item>
     </el-form>
   </el-card>
+  </el-form>
 </template>
 <script lang="ts">
 import Vue from 'vue'

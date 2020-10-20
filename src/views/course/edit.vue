@@ -1,15 +1,15 @@
 <template>
-  <section class="page advert-space-create">
-    <create-or-edit-space :isEdit="true"></create-or-edit-space>
+  <section class="page course-create">
+    <create-or-edit-course :isEdit="true"></create-or-edit-course>
   </section>
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import CreateOrEditSpace from './components/createOrEditSpace.vue'
+import CreateOrEditCourse from './components/createOrEditCourse.vue'
 export default Vue.extend({
-  name: 'AdvertSpaceCreate',
+  name: 'CourseEdit',
   components: {
-    CreateOrEditSpace
+    CreateOrEditCourse
   }
 })
 </script>
